@@ -237,6 +237,15 @@ DELIMITER //
         END//
 DELIMITER ;
 
+DELIMITER //
+    CREATE PROCEDURE getUserProfile (IN ID INTEGER UNSIGNED)
+        BEGIN
+
+            SELECT * FROM personalProfile WHERE user_ID = ID;
+
+        END//
+DELIMITER ;
+
 -- Create Views
 DROP VIEW IF EXISTS EmployeeUser;
 CREATE VIEW EmployeeUser AS SELECT * FROM User NATURAL JOIN Employee WHERE user_ID = employee_ID;
@@ -252,6 +261,13 @@ CREATE VIEW AppliedJobs AS SELECT * FROM Applied JOIN Jobs ON applied_jobID = jo
 
 DROP VIEW IF EXISTS EmployerUser;
 CREATE VIEW EmployerUser AS SELECT * FROM User NATURAL JOIN Employer WHERE user_ID = employer_ID;
+
+DROP VIEW IF EXISTS personalProfile;
+CREATE VIEW personalProfile AS 
+SELECT * 
+FROM ((User JOIN Employee ON employee_ID = user_ID) JOIN 
+(Speak NATURAL JOIN Language) ON person_ID = user_ID) JOIN
+(Applied JOIN Jobs ON applied_jobID = job_ID) ON applicant_ID = user_ID;
 
 
 

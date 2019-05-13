@@ -34,7 +34,7 @@
           <label>Phone: </label>
           <text><%= user.phone_number %></text><br>
           <Label>Language Speak:</Label>
-          <% language.forEach(function(item) { %>
+          <% data.forEach(function(item) { %>
             <br><text><%= item.language_name %></text>
           <% }); %>
         </div>
@@ -83,7 +83,7 @@
       <div class="w-100">
         <h2 class="mb-5">Job Applied</h2>
         <div class="">
-          <% applied.forEach(function(item) { %>
+          <% data.forEach(function(item) { %>
           <a href='/job_des/<%= item.job_ID%>' class="lead"><%= item.job_title %></a><br>
           <% }); %>
         </div>
